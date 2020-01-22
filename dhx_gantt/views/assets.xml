@@ -5,6 +5,7 @@
             <!-- <script type="text/javascript" src="/dhx_gantt/static/lib/dhtmlxgantt/js/dhtmlxgantt.min.js"></script> -->
             <script type="text/javascript" src="/dhx_gantt/static/lib/dhtmlxgantt/js/dhtmlxgantt.js"></script>
             <script type="text/javascript" src="/dhx_gantt/static/lib/dhtmlxgantt/js/dhtmlxgantt_marker.js"></script>
+            <script type="text/javascript" src="/dhx_gantt/static/lib/dhtmlxgantt/js/dhtmlxgantt_tooltip.js"></script>
             <!-- <link rel="stylesheet" type="text/css" href="/dhx_gantt/static/lib/dhtmlxgantt/css/dhtmlxgantt.css"/> -->
             <link rel="stylesheet" type="text/css" href="/dhx_gantt/static/lib/dhtmlxgantt/skins/dhtmlxgantt_material.css"/>
             
