@@ -1,7 +1,7 @@
 /*
 @license
 
-dhtmlxGantt v.6.2.3 Standard
+dhtmlxGantt v.6.3.4 Standard
 
 This version of dhtmlxGantt is distributed under GPL 2.0 license and can be legally used in GPL projects.
 
@@ -10,5 +10,237 @@ To use dhtmlxGantt in non-GPL projects (and get Pro version of the product), ple
 (c) XB Software Ltd.
 
 */
-!function(t,e){if("object"==typeof exports&&"object"==typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var r=e();for(var a in r)("object"==typeof exports?exports:t)[a]=r[a]}}(window,function(){return function(t){var e={};function r(a){if(e[a])return e[a].exports;var n=e[a]={i:a,l:!1,exports:{}};return t[a].call(n.exports,n,n.exports,r),n.l=!0,n.exports}return r.m=t,r.c=e,r.d=function(t,e,a){r.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:a})},r.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},r.t=function(t,e){if(1&e&&(t=r(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var a=Object.create(null);if(r.r(a),Object.defineProperty(a,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var n in t)r.d(a,n,function(e){return t[e]}.bind(null,n));return a},r.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return r.d(e,"a",e),e},r.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},r.p="/codebase/",r(r.s=216)}({216:function(t,e){!function(){function t(t){if(!gantt.config.show_markers)return!1;if(!t.start_date)return!1;var e=gantt.getState();if(!(+t.start_date>+e.max_date||(!t.end_date||+t.end_date<+e.min_date)&&+t.start_date<+e.min_date)){var r=document.createElement("div");r.setAttribute("data-marker-id",t.id);var a="gantt_marker";gantt.templates.marker_class&&(a+=" "+gantt.templates.marker_class(t)),t.css&&(a+=" "+t.css),t.title&&(r.title=t.title),r.className=a;var n=gantt.posFromDate(t.start_date);if(r.style.left=n+"px",r.style.height=Math.max(gantt.getRowTop(gantt.getVisibleTaskCount()),0)+"px",t.end_date){var o=gantt.posFromDate(t.end_date);r.style.width=Math.max(o-n,0)+"px"}return t.text&&(r.innerHTML="<div class='gantt_marker_content' >"+t.text+"</div>"),r}}function e(){if(gantt.$task_data){var t=document.createElement("div");t.className="gantt_marker_area",gantt.$task_data.appendChild(t),gantt.$marker_area=t}}gantt._markers||(gantt._markers=gantt.createDatastore({name:"marker",initItem:function(t){return t.id=t.id||gantt.uid(),t}})),gantt.config.show_markers=!0,gantt.attachEvent("onBeforeGanttRender",function(){gantt.$marker_area||e()}),gantt.attachEvent("onDataRender",function(){gantt.$marker_area||(e(),gantt.renderMarkers())}),gantt.attachEvent("onGanttReady",function(){e(),gantt.$services.getService("layers").createDataRender({name:"marker",defaultContainer:function(){return gantt.$marker_area}}).addLayer(t)}),gantt.getMarker=function(t){return this._markers?this._markers.getItem(t):null},gantt.addMarker=function(t){return this._markers.addItem(t)},gantt.deleteMarker=function(t){return!!this._markers.exists(t)&&(this._markers.removeItem(t),!0)},gantt.updateMarker=function(t){this._markers.refresh(t)},gantt._getMarkers=function(){return this._markers.getItems()},gantt.renderMarkers=function(){this._markers.refresh()}}()}})});
-//# sourceMappingURL=dhtmlxgantt_marker.js.map
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("ext/dhtmlxgantt_marker", [], factory);
+	else if(typeof exports === 'object')
+		exports["ext/dhtmlxgantt_marker"] = factory();
+	else
+		root["ext/dhtmlxgantt_marker"] = factory();
+})(window, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/codebase/sources/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./sources/ext/marker.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./sources/ext/marker.js":
+/*!*******************************!*\
+  !*** ./sources/ext/marker.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+(function(){
+
+if(!gantt._markers) {
+	gantt._markers = gantt.createDatastore({
+		name: "marker",
+		initItem: function (marker) {
+			marker.id = marker.id || gantt.uid();
+			return marker;
+		}
+	});
+}
+
+gantt.config.show_markers = true;
+
+function render_marker(marker){
+	if(!gantt.config.show_markers)
+		return false;
+
+	if(!marker.start_date)
+		return false;
+
+	var state = gantt.getState();
+	if(+marker.start_date > +state.max_date)
+		return;
+	if((!marker.end_date || +marker.end_date < +state.min_date) && +marker.start_date < +state.min_date)
+		return;
+
+	var div = document.createElement("div");
+
+	div.setAttribute("data-marker-id", marker.id);
+
+	var css = "gantt_marker";
+	if(gantt.templates.marker_class)
+		css += " " + gantt.templates.marker_class(marker);
+
+	if(marker.css){
+		css += " " + marker.css;
+	}
+
+	if(marker.title){
+		div.title = marker.title;
+	}
+	div.className = css;
+
+	var start = gantt.posFromDate(marker.start_date);
+	div.style.left = start + "px";
+	div.style.height = Math.max(gantt.getRowTop(gantt.getVisibleTaskCount()), 0) + "px";
+	if(marker.end_date){
+		var end = gantt.posFromDate(marker.end_date);
+		div.style.width = Math.max((end - start), 0) + "px";
+
+	}
+
+	if(marker.text){
+		div.innerHTML = "<div class='gantt_marker_content' >" + marker.text + "</div>";
+	}
+
+	return div;
+}
+
+function initMarkerArea(){
+	if(!gantt.$task_data)
+		return;
+
+	var markerArea = document.createElement("div");
+	markerArea.className = "gantt_marker_area";
+	gantt.$task_data.appendChild(markerArea);
+	gantt.$marker_area = markerArea;
+}
+
+gantt.attachEvent("onBeforeGanttRender", function(){
+	if(!gantt.$marker_area)
+		initMarkerArea();
+});
+
+gantt.attachEvent("onDataRender", function(){
+	if(!gantt.$marker_area){
+		initMarkerArea();
+		gantt.renderMarkers();
+	}
+});
+
+gantt.attachEvent("onGanttReady", function(){
+	initMarkerArea();
+
+	var layers = gantt.$services.getService("layers");
+	var markerRenderer = layers.createDataRender({
+		name: "marker",
+		defaultContainer: function(){ return gantt.$marker_area;}
+	});
+	markerRenderer.addLayer(render_marker);
+});
+
+gantt.getMarker = function(id){
+	if(!this._markers) return null;
+
+	return this._markers.getItem(id);
+};
+
+gantt.addMarker = function(marker){
+	return this._markers.addItem(marker);
+};
+
+gantt.deleteMarker = function(id){
+	if(!this._markers.exists(id))
+		return false;
+
+	this._markers.removeItem(id);
+	return true;
+};
+gantt.updateMarker = function(id){
+	this._markers.refresh(id);
+};
+
+gantt._getMarkers = function(){
+	return this._markers.getItems();
+};
+
+gantt.renderMarkers = function () {
+	this._markers.refresh();
+};
+
+})();
+
+/***/ })
+
+/******/ });
+});
