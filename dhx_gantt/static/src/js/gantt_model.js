@@ -55,9 +55,13 @@ odoo.define('dhx_gantt.GanttModel', function (require) {
             this.map_open = params.open;
             this.map_links_serialized_json = params.links_serialized_json;
             this.map_total_float = params.total_float;
-            this.map_parent = 'project_id';
+            this.map_parent = params.group_by;
             this.modelName = params.modelName;
             this.linkModel = params.linkModel;
+            this.map_date_deadline = params.date_deadline;
+//            if(!params.group_by){
+//                this.map_parent='project_id';
+//            }
             return this._load(params);
         },
         reload: function(id, params){
@@ -100,7 +104,7 @@ odoo.define('dhx_gantt.GanttModel', function (require) {
             var self = this;
             this.res_ids = [];
             var links = [];
-            records.forEach(function(record){ 
+            records.forEach(function(record){
                 self.res_ids.push(record[self.map_id]);
                 // value.add(-self.getSession().getTZOffset(value), 'minutes')
                 // data.timezone_offset = (-self.date_object.getTimezoneOffset());
@@ -111,7 +115,34 @@ odoo.define('dhx_gantt.GanttModel', function (require) {
                     datetime = false;
                 }
 
+                var deadline_datetime;
+                if(record[self.map_date_deadline]){
+                    deadline_datetime = formatFunc(record[self.map_date_deadline]);
+                }else{
+                    deadline_datetime = false;
+                }
+
                 var task = {};
+//                if(self.map_parent){
+//                    var projectFound = data.find(function(element) {
+//                        return element.isProject && element.serverId == record[self.map_parent][0];
+//                    });
+//                    if(!projectFound){
+//                        // console.log('project not found');
+//                        var user = {
+//                            id: _.uniqueId('user-'),
+//                            serverId: record[self.map_parent][0],
+//                            text: record[self.map_parent][1],
+//                            isProject: true,
+//                            open: true,
+//                        }
+//                        task.parent = user.id;
+//                        data.push(user);
+//                    }else{
+//                        task.parent = projectFound.id;
+//                    }
+//                }
+
                 if(self.map_parent){
                     var projectFound = data.find(function(element) {
                         return element.isProject && element.serverId == record[self.map_parent][0];
@@ -121,9 +152,15 @@ odoo.define('dhx_gantt.GanttModel', function (require) {
                         var project = {
                             id: _.uniqueId('project-'),
                             serverId: record[self.map_parent][0],
-                            text: record[self.map_parent][1],
+//                            text: record[self.map_parent][1],
                             isProject: true,
                             open: true,
+                        }
+                        // for un defined task for users
+                        if(record[self.map_parent][1]){
+                            project.text = record[self.map_parent][1];
+                        }else{
+                           project.text = "Undefined Tasks"
                         }
                         task.parent = project.id;
                         data.push(project);
@@ -131,6 +168,12 @@ odoo.define('dhx_gantt.GanttModel', function (require) {
                         task.parent = projectFound.id;
                     }
                 }
+                if(record[self.map_text]){
+                    task.text = record[self.map_text];
+                    }else{
+                        task.text = "undefined";
+                    }
+
                 task.id = record[self.map_id];
                 task.text = record[self.map_text];
                 task.start_date = datetime;
@@ -139,6 +182,7 @@ odoo.define('dhx_gantt.GanttModel', function (require) {
                 task.open = record[self.map_open];
                 task.links_serialized_json = record[self.map_links_serialized_json];
                 task.total_float = record[self.map_total_float];
+                task.deadline = deadline_datetime;
 
                 data.push(task);
                 links.push.apply(links, JSON.parse(record.links_serialized_json))

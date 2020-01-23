@@ -43,6 +43,7 @@ odoo.define('dhx_gantt.GanttRenderer', function (require) {
             this.map_links_serialized_json = params.map_links_serialized_json;
             this.link_model = params.link_model;
             this.is_total_float = params.is_total_float;
+            this.map_date_deadline = params.map_date_deadline;
             // console.log('params');
             // console.log(params);
 
@@ -235,7 +236,7 @@ odoo.define('dhx_gantt.GanttRenderer', function (require) {
             }
         },
         destroy: function () {
-            gantt.clearAll();
+//            gantt.clearAll();
             this._super.apply(this, arguments);
         },
     });

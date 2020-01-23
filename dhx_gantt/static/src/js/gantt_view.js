@@ -37,6 +37,8 @@ odoo.define('dhx_gantt.GanttView', function (require) {
             this.loadParams.total_float = viewInfo.arch.attrs.total_float;
             this.loadParams.modelName = params.modelName;
             this.loadParams.linkModel = viewInfo.arch.attrs.link_model;
+            this.loadParams.date_deadline = viewInfo.arch.attrs.date_deadline;
+            this.loadParams.group_by = viewInfo.arch.attrs.group_by;
 
             // this.loadParams.fields = 
             this.loadParams.fieldNames = [
@@ -47,10 +49,11 @@ odoo.define('dhx_gantt.GanttView', function (require) {
                 viewInfo.arch.attrs.progress,
                 viewInfo.arch.attrs.text,
                 viewInfo.arch.attrs.links_serialized_json,
+                viewInfo.arch.attrs.date_deadline,
             ];
             // console.log('infamous');
-            // console.log(this.loadParams.fields);
-            // console.log(this.loadParams.fieldNames);
+            // console.log(this.loadParams.fields);s
+//             console.log(this.rendererParams);
 
             this.rendererParams.initDomain = params.domain;
             this.rendererParams.modelName = params.modelName;
@@ -64,6 +67,8 @@ odoo.define('dhx_gantt.GanttView', function (require) {
             this.rendererParams.link_model = viewInfo.arch.attrs.link_model;
             this.rendererParams.link_model = viewInfo.arch.attrs.link_model;
             this.rendererParams.is_total_float = viewInfo.arch.attrs.total_float;
+            this.rendererParams.map_date_deadline = viewInfo.arch.attrs.date_deadline;
+            this.rendererParams.group_by = viewInfo.arch.attrs.group_by;
 
         },
         _processFieldsView: function (fieldsView, viewType) {
