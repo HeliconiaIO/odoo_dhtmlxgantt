@@ -43,8 +43,7 @@ odoo.define('dhx_gantt.GanttRenderer', function (require) {
             this.map_links_serialized_json = params.map_links_serialized_json;
             this.link_model = params.link_model;
             this.is_total_float = params.is_total_float;
-            // console.log('params');
-            // console.log(params);
+            this.map_date_deadline = params.map_date_deadline;
 
             var self = this;
             // todo: make this read from some database variable
@@ -63,11 +62,13 @@ odoo.define('dhx_gantt.GanttRenderer', function (require) {
                 {name: "text", tree: true, resize: true},
                 {name: "start_date", align: "center", resize: true},
                 {name: "duration", align: "center"},
-                // {name: "add", width: 44, min_width: 44, max_width: 44}
+                {name: "add", width: 44, min_width: 44, max_width: 44}
             ]
             if(this.is_total_float){
                 gantt.config.columns.push({name: "total_float", label: "Total Float", align: "center"})
             }
+
+            gantt.templates.grid_row_class = function( start, end, task ){ if ( task.$level > 0 ) { return "nested_task" } return ""; };
 
             gantt.setWorkTime({day:5, hours: false });
             gantt.setWorkTime({day:6, hours: true });
@@ -235,7 +236,7 @@ odoo.define('dhx_gantt.GanttRenderer', function (require) {
             }
         },
         destroy: function () {
-            gantt.clearAll();
+//            gantt.clearAll();
             this._super.apply(this, arguments);
         },
     });
